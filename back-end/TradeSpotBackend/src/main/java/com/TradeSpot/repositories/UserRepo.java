@@ -1,6 +1,7 @@
-package com.olx.repositories;
+package com.TradeSpot.repositories;
 
-import com.olx.entities.User;
+
+import com.TradeSpot.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
