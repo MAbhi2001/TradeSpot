@@ -1,4 +1,6 @@
-package com.olx.entities;
+
+package com.TradeSpot.entities;
+
 
 
 import jakarta.persistence.GeneratedValue;
