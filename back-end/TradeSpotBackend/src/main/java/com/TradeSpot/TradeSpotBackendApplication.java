@@ -1,4 +1,4 @@
-package com.app.backend;
+package com.TradeSpot;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

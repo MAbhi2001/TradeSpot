@@ -1,4 +1,4 @@
-package com.app.backend;
+package com.TradeSpot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
