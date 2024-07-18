@@ -1,9 +1,17 @@
-package com.olx.controllers;
+
+package com.TradeSpot.controllers;
 
 
-import com.olx.DTO.UserDTO;
-import com.olx.entities.User;
-import com.olx.services.UserServices;
+
+import com.TradeSpot.DTO.UserDTO;
+import com.TradeSpot.entities.User;
+
+import com.TradeSpot.services.UserServices;
+
+
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
