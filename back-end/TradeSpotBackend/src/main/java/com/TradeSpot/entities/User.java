@@ -1,7 +1,9 @@
+
 package com.TradeSpot.entities;
 
 import jakarta.persistence.*;
 import com.TradeSpot.entities.*;
+
 @Entity
 @Table(name = "Users")
 public class User extends BaseEntity{
