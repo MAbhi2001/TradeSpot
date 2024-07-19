@@ -4,6 +4,9 @@ package com.TradeSpot.controllers;
 
 
 import com.TradeSpot.DTO.UserDTO;
+
+import com.TradeSpot.entities.ApiResponse;
+
 import com.TradeSpot.entities.User;
 
 import com.TradeSpot.services.UserServices;
@@ -29,14 +32,14 @@ public class UserController {
     private UserServices userservice;
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<User> saveUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity<ApiResponse> saveUser(@RequestBody UserDTO userDTO){
         User user=userservice.addUser(userDTO);
 
         if(user!= null){
-            return ResponseEntity.ok(user);
+            return ResponseEntity.ok().body(new ApiResponse("User added successfully"));
         }
         else{
-            return ResponseEntity.status(500).build();
+            return ResponseEntity.status(500).body(new ApiResponse("Unsuccessfull: User not added"));
         }
     }
 
