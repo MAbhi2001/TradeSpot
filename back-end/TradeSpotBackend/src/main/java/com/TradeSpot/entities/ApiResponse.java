@@ -9,13 +9,17 @@ import java.time.LocalDate;
 @Setter
 public class ApiResponse {
 
+
     private String message;
+
     private LocalDate date;
 
 
 
-    public ApiResponse(String massage) {
-        this.message = massage;
+    public ApiResponse(String message) {
+
+        this.message = message;
+
         this.date=LocalDate.now();
     }
 }

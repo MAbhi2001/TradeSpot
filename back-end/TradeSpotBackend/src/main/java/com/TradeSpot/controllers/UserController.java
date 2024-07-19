@@ -4,7 +4,9 @@ package com.TradeSpot.controllers;
 
 
 import com.TradeSpot.DTO.UserDTO;
+
 import com.TradeSpot.entities.ApiResponse;
+
 import com.TradeSpot.entities.User;
 
 import com.TradeSpot.services.UserServices;
