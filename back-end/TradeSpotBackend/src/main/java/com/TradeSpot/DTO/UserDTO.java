@@ -1,7 +1,14 @@
+
 package com.TradeSpot.DTO;
 
 import com.TradeSpot.entities.Roles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;

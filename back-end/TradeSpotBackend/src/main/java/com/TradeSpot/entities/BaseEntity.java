@@ -1,4 +1,6 @@
+
 package com.TradeSpot.entities;
+
 
 
 import jakarta.persistence.GeneratedValue;

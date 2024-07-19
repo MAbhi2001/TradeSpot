@@ -1,7 +1,11 @@
+
 package com.TradeSpot.entities;
 
 import jakarta.persistence.*;
 import com.TradeSpot.entities.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +13,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 @Table(name = "Users")
@@ -33,9 +38,6 @@ public class User extends BaseEntity{
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY , orphanRemoval = true, cascade = CascadeType.ALL)
     List<Product> products=new ArrayList<>();
-
-
-
 
 
 }
