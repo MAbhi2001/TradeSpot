@@ -10,10 +10,9 @@ import { ProductService } from './services/product.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { NotFoundComponentComponent } from './components/not-found-component/not-found-component.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
 import { AppRoutingModule } from './app-routing.module';
-import { RegisterComponent } from './components/register/register.component';
+import { RegisterComponent } from './register/register.component';
 
 // Define your routes here
 const routes: Routes = [
@@ -28,7 +27,6 @@ const routes: Routes = [
     NavbarComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    NotFoundComponentComponent,
     RegisterComponent
   ],
   imports: [
