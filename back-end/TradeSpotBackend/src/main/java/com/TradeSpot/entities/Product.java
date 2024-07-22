@@ -30,8 +30,10 @@ public class Product extends BaseEntity {
     @Column(name = "addedDate")
     private LocalDate addedDate;
 
+
     @Column(name = "imagePath")
     private String productImgPath;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
