@@ -4,17 +4,17 @@ import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-categories',
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.css']
 })
-export class HomeComponent implements OnInit {
+export class CategoriesComponent implements OnInit {
   products: Product[] = []; // Updated to Product
   searchQuery: string = '';
   categories: { name: string, imageUrl: string }[] = [
     { name: 'Electronics', imageUrl: 'assets/electronics.jpg' },
     { name: 'Furniture', imageUrl: 'assets/furniture.jpg' },
-    { name: 'Clothing', imageUrl: 'assets/clothing.jpg' },
+    { name: 'Fashion', imageUrl: 'assets/clothing.jpg' },
     { name: 'Books', imageUrl: 'assets/books.jpg' },
     { name: 'Vehicles', imageUrl: 'assets/vehicles.jpg' }
   ];
@@ -45,4 +45,14 @@ export class HomeComponent implements OnInit {
       this.loadProducts(); // Reset to featured products if search query is empty
     }
   }
+  
+  loadProductsByCategory(categoryName: string): void {
+    // Optionally, you can filter products by category and load them
+    // Optionally, you can filter products by category and load them
+    this.productService['getProductsByCategory'](categoryName).subscribe(
+      (products: Product[]) => this.products = products,
+      (      error: any) => console.error(`Error fetching ${categoryName} products`, error)
+    );
+  }
+
 }
