@@ -1,58 +1,31 @@
-<!-- src/app/components/home/home.component.html -->
+
 <div class="home-container">
 
-  <nav class="navbar">
-    <div class="navbar-container">
-      <!-- Brand name or logo -->
-      <div class="navbar-brand">
-        <h1>TRADEspot</h1>
+  <section class="categories">
+    <br><br><br>
+    <hr>
+    <h2><strong>Categories</strong></h2>
+    <hr>
+    <div class="category-list">
+      <div *ngFor="let category of categories" class="category-card">
+        <img [src]="category.imageUrl" alt="{{category.name}}" />
+        <h3>{{category.name}}</h3>
       </div>
-  
-      <!-- Navigation links and search section -->
-      <div class="navbar-content">
-        <ul class="navbar-menu">
-          <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-          <li><a routerLink="/products" routerLinkActive="active">Products</a></li>
-          <li><a routerLink="/about" routerLinkActive="active">About</a></li>
-          <!-- Add more links as needed -->
-          <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
-          <li><a routerLink="/register" routerLinkActive="active">Register</a></li>
-        </ul>
-  
-        <!-- Search section -->
-        <div class="navbar-search">
-          <input type="text" [(ngModel)]="searchQuery" placeholder="Search..." (input)="onSearch()"
-          class="search-input" />
-          <button (click)="searchProducts()" class="search-button">Search</button>
+    </div>
+  </section>
+
+  <section class="featured-products" *ngIf="products.length > 0">
+    <h2>Featured Products</h2>
+    <div class="product-list">
+      <div *ngFor="let product of products" class="product-card" [@fadeIn]>
+        <img [src]="product.imageUrl || 'assets/default-product.jpg'" alt="{{product.title}}" />
+        <div class="product-details">
+          <h3>{{product.title}}</h3>
+          <p>{{product.description}}</p>
+          <span class="price">${{product.price}}</span>
+          <a [routerLink]="['/products', product.id]" class="view-button">View Details</a>
         </div>
       </div>
     </div>
-  </nav>
-  
-  
-    <section class="categories">
-      <h2>Categories</h2>
-      <div class="category-list">
-        <div *ngFor="let category of categories" class="category-card">
-          <img [src]="category.imageUrl" alt="{{category.name}}" />
-          <h3>{{category.name}}</h3>
-        </div>
-      </div>
-    </section>
-  
-    <section class="featured-products" *ngIf="products.length > 0">
-      <h2>Featured Products</h2>
-      <div class="product-list">
-        <div *ngFor="let product of products" class="product-card" [@fadeIn]>
-          <img [src]="product.imageUrl || 'assets/default-product.jpg'" alt="{{product.title}}" />
-          <div class="product-details">
-            <h3>{{product.title}}</h3>
-            <p>{{product.description}}</p>
-            <span class="price">${{product.price}}</span>
-            <a [routerLink]="['/products', product.id]" class="view-button">View Details</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  
+  </section>
+</div>

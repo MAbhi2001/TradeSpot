@@ -6,7 +6,14 @@ import { RouterModule, Routes } from '@angular/router'; // Import RouterModule a
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { ProductService } from './services/services/product.service'; 
+import { ProductService } from './services/product.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { LoginComponent } from './components/login/login.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { NotFoundComponentComponent } from './components/not-found-component/not-found-component.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
+import { AppRoutingModule } from './app-routing.module';
+import { RegisterComponent } from './components/register/register.component';
 
 // Define your routes here
 const routes: Routes = [
@@ -17,15 +24,24 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent,
+    LoginComponent,
+    ForgotPasswordComponent,
+    NotFoundComponentComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes) // Import RouterModule and configure routes
+    RouterModule,
+    FontAwesomeModule // Import RouterModule and configure routes
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+}
