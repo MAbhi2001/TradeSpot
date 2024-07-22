@@ -12,8 +12,10 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './register/register.component';
+
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+
 
 // Define your routes here
 const routes: Routes = [
@@ -30,6 +32,7 @@ const routes: Routes = [
     ForgotPasswordComponent,
     RegisterComponent,
     ProductListComponent
+
   ],
   imports: [
     BrowserModule,

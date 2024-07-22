@@ -1,4 +1,7 @@
-package com.olx.entities;
+
+package com.TradeSpot.entities;
+
+
 
 public enum Roles {
 
