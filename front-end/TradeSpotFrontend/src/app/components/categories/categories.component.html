@@ -2,16 +2,18 @@
 <div class="home-container">
 
   <section class="categories">
-    <br><br><br>
-    <hr>
+    <br><br>
+
     <h2><strong>Categories</strong></h2>
-    <hr>
+    <br>
+
     <div class="category-list">
-      <div *ngFor="let category of categories" class="category-card">
-        <img [src]="category.imageUrl" alt="{{category.name}}" />
+      <div *ngFor="let category of categories" class="category-card" (click)="loadProductsByCategory(category.name)">
+        <img [src]="category.imageUrl" alt="{{category.name}}" (click)="loadProductsByCategory(category.name)"/>
         <h3>{{category.name}}</h3>
       </div>
     </div>
+    
   </section>
 
   <section class="featured-products" *ngIf="products.length > 0">
@@ -28,4 +30,5 @@
       </div>
     </div>
   </section>
+  <app-product-list/>
 </div>
