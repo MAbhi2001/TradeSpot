@@ -1,6 +1,6 @@
 // src/app/components/home/home.component.ts
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/services/services/product.service'; 
+import { ProductService } from 'src/app/services/product.service'; 
 import { Product } from 'src/app/models/product';
 
 @Component({
@@ -12,11 +12,11 @@ export class HomeComponent implements OnInit {
   products: Product[] = []; // Updated to Product
   searchQuery: string = '';
   categories: { name: string, imageUrl: string }[] = [
-    { name: 'Electronics', imageUrl: 'assets/categories/electronics.jpg' },
-    { name: 'Furniture', imageUrl: 'assets/categories/furniture.jpg' },
-    { name: 'Clothing', imageUrl: 'assets/categories/clothing.jpg' },
-    { name: 'Books', imageUrl: 'assets/categories/books.jpg' },
-    { name: 'Vehicles', imageUrl: 'assets/categories/vehicles.jpg' }
+    { name: 'Electronics', imageUrl: 'assets/electronics.jpg' },
+    { name: 'Furniture', imageUrl: 'assets/furniture.jpg' },
+    { name: 'Clothing', imageUrl: 'assets/clothing.jpg' },
+    { name: 'Books', imageUrl: 'assets/books.jpg' },
+    { name: 'Vehicles', imageUrl: 'assets/vehicles.jpg' }
   ];
 
   constructor(private productService: ProductService) { } // Updated service injection
