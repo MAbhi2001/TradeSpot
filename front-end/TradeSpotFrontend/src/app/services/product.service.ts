@@ -8,9 +8,9 @@ import { Product } from 'src/app/models/product';
   providedIn: 'root'
 })
 export class ProductService {
-  [x: string]: any;
+  
 
-  private apiUrl = 'http://api.example.com/products'; // Updated API URL
+  private apiUrl = 'http://localhost:8080/product'; // Updated API URL
 
   constructor(private http: HttpClient) { }
 
