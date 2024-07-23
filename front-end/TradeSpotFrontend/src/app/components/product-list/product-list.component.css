@@ -1,0 +1,52 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Distribute items evenly with equal space between */
+  padding: 20px;
+}
+
+.card {
+  flex: 0 0 calc(33.33% - 20px); /* Adjust width to approximately one-third minus margins */
+  margin-bottom: 20px; /* Vertical spacing between cards */
+  border: 1px solid #ccc;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.texts {
+  padding: 10px;
+}
+
+.texts h2 {
+  margin-top: 0;
+}
+
+.texts p {
+  margin-bottom: 10px;
+}
+
+.texts button {
+  border: none;
+  padding: 8px 20px;
+  background: #566270;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.texts button:hover {
+  background: #e0e3da;
+  color: #566270;
+  cursor: pointer;
+}

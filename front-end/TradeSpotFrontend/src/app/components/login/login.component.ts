@@ -9,6 +9,5 @@ export class LoginComponent {
 
   login(data:any){
     console.log(data);
-    
   }
 }
