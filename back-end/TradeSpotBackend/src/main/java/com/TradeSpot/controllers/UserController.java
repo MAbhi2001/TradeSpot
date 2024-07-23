@@ -3,21 +3,28 @@ package com.TradeSpot.controllers;
 
 
 
+import com.TradeSpot.DTO.LoginDTO;
+import com.TradeSpot.DTO.LoginResponse;
 import com.TradeSpot.DTO.UserDTO;
 
 import com.TradeSpot.entities.ApiResponse;
 
 import com.TradeSpot.entities.User;
 
+import com.TradeSpot.services.JwtService;
 import com.TradeSpot.services.UserServices;
 
 
-
-
-
+import com.TradeSpot.services.jwt.UserJwtImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
@@ -31,12 +38,21 @@ public class UserController {
     @Autowired
     private UserServices userservice;
 
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @Autowired
+    private UserJwtImpl userJwt;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtService jwtService;
+
+    @PostMapping(path = "/signup", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<ApiResponse> saveUser(@RequestBody UserDTO userDTO){
         User user=userservice.addUser(userDTO);
 
         if(user!= null){
-            return ResponseEntity.ok().body(new ApiResponse("User added successfully"));
+            return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse("User added successfully"));
         }
         else{
             return ResponseEntity.status(500).body(new ApiResponse("Unsuccessfull: User not added"));
@@ -73,11 +89,31 @@ public class UserController {
         userservice.deleteUser(id);
         return ResponseEntity.ok().build();
 
-
     }
 
     @GetMapping("/byname/{name}")
     public List<User> getByName(@PathVariable String name){
         return userservice.findByName(name);
+    }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO){
+    try{
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginDTO.getEmail(),loginDTO.getPassword())
+        );
+    }catch (AuthenticationException e){
+        return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+    UserDetails user;
+    try{
+       user=userJwt.loadUserByUsername(loginDTO.getEmail());
+    }catch (UsernameNotFoundException e){
+        return ResponseEntity.status(404).build();
+    }
+    String jwt=jwtService.generateToken(user.getUsername());
+
+    return ResponseEntity.ok(new LoginResponse(jwt));
     }
 }

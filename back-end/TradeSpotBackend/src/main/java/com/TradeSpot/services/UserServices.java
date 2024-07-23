@@ -3,6 +3,8 @@ package com.TradeSpot.services;
 
 
 import com.TradeSpot.DTO.UserDTO;
+import com.TradeSpot.customException.CustomException;
+import com.TradeSpot.entities.Roles;
 import com.TradeSpot.entities.User;
 
 import com.TradeSpot.repositories.UserRepo;
@@ -13,6 +15,10 @@ import com.TradeSpot.repositories.UserRepo;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +26,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class UserServices {
+public class UserServices  {
 
     @Autowired
     private UserRepo userRepo;
@@ -28,9 +34,19 @@ public class UserServices {
     @Autowired
     private ModelMapper mapper;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     public User addUser(UserDTO userDTO) {
 
+        if(userRepo.existsByEmail(userDTO.getEmail())){
+            return null;
+        }
         User user= mapper.map(userDTO, User.class);
+
+        //hash the password
+        user.setPassword(encoder.encode(userDTO.getPassword()));
+        user.setRole(Roles.valueOf(userDTO.getRole()));
         return userRepo.save(user);
     }
 
@@ -55,4 +71,6 @@ public class UserServices {
 
         return userRepo.getByName(name);
     }
+
+
 }
