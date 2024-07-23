@@ -7,7 +7,9 @@ import com.TradeSpot.repositories.CategoryRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +22,16 @@ public class CategoryServices {
     @Autowired
     private ModelMapper mapper;
 
-    public Category saveCategory(CategoryDTO categoryDTO) {
+    @Autowired
+    private  Imageservices imageservices;
 
-        Category category=mapper .map(categoryDTO, Category.class);
+    public Category saveCategory(CategoryDTO categoryDTO, MultipartFile file) throws IOException {
+
+        String imgPath=imageservices.uploadFile(file, "Category");
+
+//
+        Category category= Category.builder().name(categoryDTO.getName())
+                .categoryImgPath(imgPath).build();
         return categoryRepo.save(category);
     }
 
