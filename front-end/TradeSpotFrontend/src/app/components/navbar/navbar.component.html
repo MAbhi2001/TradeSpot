@@ -1,36 +1,32 @@
-<!-- <p>navbar works!</p> -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/"><img src="../../../assets/logo1.png" alt="TradeSpot logo"></a>
-  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active"><a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a></li>
-      
-      <li class="nav-item active"><a class="nav-link" routerLink="/about" routerLinkActive="active">AboutUs</a></li>
-    </ul>
-
-    <form class="d-flex">
-      <input type="search" class="form-control me-2" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-primary" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-          height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-          <path
-            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-        </svg></button>
+<nav class="navbar navbar-expand-md navbar-light bg-light justify-content-between">
+  <a class="navbar-brand" href="/"><img src="../../../assets/logo.png" alt="OLX logo"></a>
+  <!-- <div>
+    <form class="form-inline justify-content-center" style="text-align: center;">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
     </form>
-
-
-    <!-- Profile Icon and Button -->
-    <div class="profile-container ms-3 d-flex align-items-center">
-      <fa-icon [icon]="icon" class="profile-img"></fa-icon>
-      &nbsp;
-      
-    <!-- Login and Register -->
-      <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+  </div> -->
+  <div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+      <div class="search">
+        <input class="search_input" type="text" name="" placeholder="Search here...">
+        <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+      </div>
     </div>
-
+  </div>
+  <div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav ml-auto ">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/login" routerLinkActive="active"><strong>Login</strong></a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Log in</a>
+        </li> -->
+      </ul>
+    </div>
   </div>
 </nav>

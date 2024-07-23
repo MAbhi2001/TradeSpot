@@ -10,7 +10,9 @@ import com.TradeSpot.repositories.UserRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,13 +31,26 @@ public class ProductService {
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private Imageservices imageservices;
 
-    public Product saveProduct(ProductDTO productDTO, String categoryName, Long userId) {
+
+    public Product saveProduct(ProductDTO productDTO, String categoryName, Long userId, MultipartFile file) throws IOException {
+
+        String filePath= imageservices.uploadFile(file, "Product");
+
 
         Category category=categoryServices.findByName(categoryName);
         User user = userRepo.findById(userId).orElseThrow();
 
-        Product product=mapper.map(productDTO, Product.class);
+        Product product= Product.builder()
+                        .productName(productDTO.getProductName())
+                                .productImgPath(filePath)
+                                        .price(productDTO.getPrice())
+                                                .addedDate(productDTO.getAddedDate())
+                                                        .description(productDTO.getDescription())
+                                                                .isActive(true)
+                                                                        .build();
         product.setCategory(category);
         product.setUser(user);
         return productRepo.save(product);

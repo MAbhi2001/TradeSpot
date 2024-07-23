@@ -22,15 +22,13 @@ public class ProductDTO {
 
     private LocalDate addedDate;
 
-    private String productImgPath;
     private boolean isActive;
 
-    public ProductDTO(String productName, String description, double price, LocalDate addedDate, String productImgPath) {
+    public ProductDTO(String productName, String description, double price, LocalDate addedDate) {
         this.productName = productName;
         this.description = description;
         this.price = price;
         this.addedDate = addedDate;
-        this.productImgPath = productImgPath;
         this.isActive=true;
     }
 }

@@ -11,5 +11,6 @@ import lombok.Setter;
 @Setter
 public class CategoryDTO {
 
+
     private String name;
 }
