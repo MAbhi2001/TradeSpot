@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,13 +22,13 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping(path="/{categoryName}/{userId}" , consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path="/{categoryName}/{userId}" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse> addProduct(
-                                                  @PathVariable String categoryName,
-                                                  @PathVariable long userId,
-                                                  @RequestBody ProductDTO productDTO)
-    {
-        Product product= productService.saveProduct(productDTO, categoryName, userId);
+            @PathVariable String categoryName,
+            @PathVariable long userId,
+            @ModelAttribute ProductDTO productDTO,
+            @RequestPart("image") MultipartFile file) throws IOException {
+        Product product= productService.saveProduct(productDTO, categoryName, userId, file);
         if(product!=null){
             return ResponseEntity.ok().body(new ApiResponse("product added successfully"));
         }
