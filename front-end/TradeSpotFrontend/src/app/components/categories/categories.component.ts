@@ -30,19 +30,12 @@ export class CategoriesComponent implements OnInit {
   }
 
   loadProducts(): void {
-    this.productService.getProducts().subscribe(
-      (products: Product[]) => this.products = products, // Updated
-      error => console.error('Error fetching products', error) // Updated
-    );
+    this.productService.getProducts().subscribe((res) => {
+      console.log(res);
+    })
   }
 
-  onSearch(): void {
-    
-  }
-
-  searchProducts(): void { // Updated method name
-    
-  }
+ 
   
   loadProductsByCategory(categoryName: string): void {
     this.productService.getProducts().subscribe((res)=>{
