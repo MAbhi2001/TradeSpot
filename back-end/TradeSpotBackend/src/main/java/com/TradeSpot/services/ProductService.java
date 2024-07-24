@@ -1,12 +1,13 @@
 package com.TradeSpot.services;
 
 import com.TradeSpot.DTO.ProductDTO;
+import com.TradeSpot.DTO.ProductResponseDTO;
 import com.TradeSpot.customException.CustomException;
 import com.TradeSpot.entities.Category;
 import com.TradeSpot.entities.Product;
 import com.TradeSpot.entities.User;
-import com.TradeSpot.repositories.ProductRepo;
-import com.TradeSpot.repositories.UserRepo;
+import com.TradeSpot.repositories.ProductRepository;
+import com.TradeSpot.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,54 +21,63 @@ import java.util.stream.Collectors;
 public class ProductService {
 
     @Autowired
-    private ProductRepo productRepo;
+    private ProductRepository productRepository;
 
     @Autowired
     private ModelMapper mapper;
 
     @Autowired
-    private CategoryServices categoryServices;
+    private CategoryService categoryService;
 
     @Autowired
-    private UserRepo userRepo;
+    private UserRepository userRepository;
 
     @Autowired
-    private Imageservices imageservices;
+    private Imageservice imageservice;
 
+    @Autowired
+    private  SellItemsServices sellItemsServices;
+
+    @Autowired
+    private BroughtItemsServices broughtItemsServices;
 
     public Product saveProduct(ProductDTO productDTO, String categoryName, Long userId, MultipartFile file) throws IOException {
 
-        String filePath= imageservices.uploadFile(file, "Product");
+        String filePath= imageservice.uploadFile(file, "Product");
 
 
-        Category category=categoryServices.findByName(categoryName);
-        User user = userRepo.findById(userId).orElseThrow();
+        Category category= categoryService.findByName(categoryName);
+        User user = userRepository.findById(userId).orElseThrow();
 
-        Product product= Product.builder()
-                        .productName(productDTO.getProductName())
-                                .productImgPath(filePath)
-                                        .price(productDTO.getPrice())
-                                                .addedDate(productDTO.getAddedDate())
-                                                        .description(productDTO.getDescription())
-                                                                .isActive(true)
-                                                                        .build();
+//        Product product= Product.builder()
+//                        .productName(productDTO.getProductName())
+//                                .productImgPath(filePath)
+//                                        .price(productDTO.getPrice())
+//                                                .addedDate(productDTO.getAddedDate())
+//                                                        .description(productDTO.getDescription())
+//                                                                .isActive(true)
+//                                                                        .build();
+        Product product=mapper.map(productDTO, Product.class);
+        product.setProductImgPath(filePath);
         product.setCategory(category);
-        product.setUser(user);
-        return productRepo.save(product);
+        product=productRepository.save(product);
+         sellItemsServices.addSellProduct(user,product);
+
+         return product;
 
 
 
 
     }
 
-    public List<ProductDTO> getALlProducts() {
+    public List<ProductResponseDTO> getALlProducts() {
 
-        List<Product> productList=productRepo.findAll();
-        return productList.stream().map(product -> mapper.map(product, ProductDTO.class)).collect(Collectors.toList());
+        List<Product> productList= productRepository.findAll();
+        return productList.stream().map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
     }
 
     public ProductDTO getProductById(long productId) throws CustomException {
-        Product product = productRepo.findById(productId)
+        Product product = productRepository.findById(productId)
                                      .orElseThrow(()-> new CustomException("Product not found with id : "+ productId));
 
         return mapper.map(product, ProductDTO.class);
@@ -75,12 +85,28 @@ public class ProductService {
     }
 
     public String deleteProduct(long productId) throws CustomException {
-        Product product = productRepo.findById(productId)
+        Product product = productRepository.findById(productId)
                                      .orElseThrow(()-> new CustomException("Product not found with id : "+ productId));
-        product.setUser(null);
+
         product.setCategory(null);
-        productRepo.deleteById(productId);
+
+        productRepository.deleteById(productId);
         return "Product deleted successfully";
+
+
+    }
+
+    public void buyProduct(long userid, long productid) {
+
+        User user=userRepository.findById(userid).orElseThrow();
+        Product product=productRepository.findById(productid).orElseThrow();
+        product.setActive(false);
+        product=productRepository.save(product);
+
+        broughtItemsServices.buyProduct(user,product);
+
+
+
 
 
     }

@@ -1,6 +1,7 @@
 package com.TradeSpot.controllers;
 
 import com.TradeSpot.DTO.ProductDTO;
+import com.TradeSpot.DTO.ProductResponseDTO;
 import com.TradeSpot.customException.CustomException;
 import com.TradeSpot.entities.ApiResponse;
 import com.TradeSpot.entities.Product;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -21,6 +21,13 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+//    @PostMapping(path = "/{categoryName}/{userId}")
+//    public void sellProduct(@PathVariable String categoryName,@PathVariable Long userId, @RequestBody ProductDTO productDTO){
+//        productService.saveProduct(productDTO,categoryName, userId);
+//    }
+
+
 
     @PostMapping(path="/{categoryName}/{userId}" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse> addProduct(
@@ -41,11 +48,11 @@ public class ProductController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ProductDTO>> listAllProduct() throws CustomException {
+    public ResponseEntity<List<ProductResponseDTO>> listAllProduct() throws CustomException {
 
-        List<ProductDTO> productDTOS= productService.getALlProducts();
-        if(productDTOS!=null){
-            return ResponseEntity.ok(productDTOS);
+        List<ProductResponseDTO> productResponseDTO= productService.getALlProducts();
+        if(productResponseDTO!=null){
+            return ResponseEntity.ok(productResponseDTO);
         }
         else{
             throw new CustomException("list is empty");
@@ -64,6 +71,13 @@ public class ProductController {
             return ResponseEntity.notFound().build();
 
         }
+    }
+
+    @PostMapping(path = "buyproduct/{userid}/{productid}")
+    public void buyProduct(@PathVariable long userid, @PathVariable long productid){
+
+        productService.buyProduct(userid, productid);
+
     }
 
     @DeleteMapping (path = "/{productId}")

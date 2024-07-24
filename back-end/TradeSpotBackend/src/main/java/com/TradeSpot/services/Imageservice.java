@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 
 
 @Service
-public class Imageservices {
+public class Imageservice {
 
 
 
@@ -22,7 +22,7 @@ public class Imageservices {
         String filePath;
         String name= file.getOriginalFilename();
 
-        filePath= path+File.pathSeparator+name;
+        filePath= path+name;
 
         File f= new File(path);
 

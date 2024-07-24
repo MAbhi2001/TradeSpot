@@ -34,12 +34,15 @@ public class User extends BaseEntity implements UserDetails {
     private String password;
     @Column(nullable = false)
     private String address;
-    @Column()
+
     @Enumerated(EnumType.STRING)
     private Roles role;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY , orphanRemoval = true, cascade = CascadeType.ALL)
-    List<Product> products=new ArrayList<>();
+    @OneToMany(mappedBy = "buyer",cascade = CascadeType.ALL)
+    List<BroughtItems> broughtItemsList=new ArrayList<>();
+
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
+    List<SellItems> sellItemsList=new ArrayList<>();
 
 
 

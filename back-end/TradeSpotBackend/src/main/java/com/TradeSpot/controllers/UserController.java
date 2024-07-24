@@ -27,16 +27,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/user")
 public class UserController {
 
     @Autowired
-    private UserServices userservice;
+    private UserService userservice;
 
     @Autowired
     private UserJwtImpl userJwt;
