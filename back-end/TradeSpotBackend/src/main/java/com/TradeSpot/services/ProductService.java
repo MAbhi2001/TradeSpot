@@ -26,7 +26,7 @@ public class ProductService {
     private ModelMapper mapper;
 
     @Autowired
-    private CategoryServices categoryServices;
+    private CategoryService categoryServices;
 
     @Autowired
     private UserRepo userRepo;

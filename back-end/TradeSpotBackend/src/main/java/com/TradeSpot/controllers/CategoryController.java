@@ -4,7 +4,7 @@ package com.TradeSpot.controllers;
 import com.TradeSpot.DTO.CategoryDTO;
 import com.TradeSpot.entities.ApiResponse;
 import com.TradeSpot.entities.Category;
-import com.TradeSpot.services.CategoryServices;
+import com.TradeSpot.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import java.util.List;
 public class CategoryController {
 
     @Autowired
-    CategoryServices categoryServices;
+    CategoryService categoryServices;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse> addCategory(

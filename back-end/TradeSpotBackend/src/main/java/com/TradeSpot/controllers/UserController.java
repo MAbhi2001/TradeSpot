@@ -7,6 +7,7 @@ import com.TradeSpot.DTO.LoginDTO;
 import com.TradeSpot.DTO.LoginResponse;
 import com.TradeSpot.DTO.UserDTO;
 
+import com.TradeSpot.DTO.UserRespDTO;
 import com.TradeSpot.entities.ApiResponse;
 
 import com.TradeSpot.entities.User;
@@ -115,5 +116,22 @@ public class UserController {
     String jwt=jwtService.generateToken(user.getUsername());
 
     return ResponseEntity.ok(new LoginResponse(jwt));
+    }
+
+    @PostMapping("/getByToken")
+    public ResponseEntity<?> getUserByToken(@RequestBody LoginResponse response){
+        try{
+           String email= jwtService.extractUsername(response.getJwtToken());
+           UserRespDTO dto=userservice.findByEmail(email);
+
+           if(dto!=null){
+               return  ResponseEntity.ok(dto);
+           }
+           else {
+               return ResponseEntity.status(404).body(new ApiResponse("Email not found"));
+           }
+        }catch (Exception e){
+            return  ResponseEntity.status(500).build();
+        }
     }
 }

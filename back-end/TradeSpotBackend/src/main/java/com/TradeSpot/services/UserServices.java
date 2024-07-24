@@ -3,21 +3,14 @@ package com.TradeSpot.services;
 
 
 import com.TradeSpot.DTO.UserDTO;
+import com.TradeSpot.DTO.UserRespDTO;
 import com.TradeSpot.customException.CustomException;
 import com.TradeSpot.entities.Roles;
 import com.TradeSpot.entities.User;
-
 import com.TradeSpot.repositories.UserRepo;
-
-
-
-
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class UserServices  {
+public class UserServices {
 
     @Autowired
     private UserRepo userRepo;
@@ -46,7 +39,7 @@ public class UserServices  {
 
         //hash the password
         user.setPassword(encoder.encode(userDTO.getPassword()));
-        user.setRole(Roles.valueOf(userDTO.getRole()));
+        user.setRole(Roles.BUYER);
         return userRepo.save(user);
     }
 
@@ -70,6 +63,11 @@ public class UserServices  {
     public List<User> findByName(String name) {
 
         return userRepo.getByName(name);
+    }
+
+    public UserRespDTO findByEmail(String email){
+        User user=userRepo.findByEmail(email).orElseThrow(()->new CustomException("User with email not exits"));
+        return  mapper.map(user, UserRespDTO.class) ;
     }
 
 

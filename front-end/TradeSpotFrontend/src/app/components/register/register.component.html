@@ -23,27 +23,27 @@
                   </div>
                 </div>
               </div>
-              <form action="#!">
+              <form action="#!" method="post" #submitForm="ngForm" (ngSubmit)="register(submitForm.value)">
                 <div class="row gy-3 gy-md-4 overflow-hidden">
                   <div class="col-12">
                     <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" name="firstName" id="firstName" placeholder="Enter First Name" required>
+                    <input type="email" class="form-control" name="firstName" ngModel  id="firstName" placeholder="Enter First Name" required>
                   </div>
                   <div class="col-12">
                     <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" name="lastName" id="lastName" placeholder="Enter Last Name" required>
+                    <input type="email" class="form-control" name="lastName" ngModel  id="lastName" placeholder="Enter Last Name" required>
                   </div>
                   <div class="col-12">
                     <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
-                    <input type="address" class="form-control" name="address" id="address" placeholder="Enter Address" required>
+                    <input type="address" class="form-control" name="address" ngModel  id="address" placeholder="Enter Address" required>
                   </div>
                   <div class="col-12">
                     <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+                    <input type="email" class="form-control" name="email" ngModel  id="email" placeholder="name@example.com" required>
                   </div>
                   <div class="col-12">
                     <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                    <input type="password" class="form-control" name="password" id="password" value="" required>
+                    <input type="password" class="form-control" name="password" ngModel id="password" value="" required>
                   </div>
                   <!-- <div class="col-12">
                     <div class="form-check">

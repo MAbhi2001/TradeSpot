@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './components/register/register.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { FaqComponent } from './components/faq/faq.component';
@@ -17,17 +17,17 @@ const routes: Routes = [
   { path: 'forgotpassword', component: ForgotPasswordComponent },
   { path: 'register', component: RegisterComponent },
   { path: '', component: CategoriesComponent },
-  { path: 'aboutus', component: AboutusComponent},
-  { path: 'faq', component: FaqComponent},
-  { path: 'features', component:FeaturesComponent },
-  { path: 'admin', component:AdminDashboardComponent},//admin
-  { path: 'user', component:UserComponent},
-  { path: 'contact', component:ContactComponent}
+  { path: 'aboutus', component: AboutusComponent },
+  { path: 'faq', component: FaqComponent },
+  { path: 'features', component: FeaturesComponent },
+  { path: 'admin', component: AdminDashboardComponent }, //admin
+  { path: 'user', component: UserComponent },
+  { path: 'contact', component: ContactComponent },
   // { path: '**', component: NavbarComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

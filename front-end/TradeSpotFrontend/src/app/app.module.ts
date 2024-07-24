@@ -9,9 +9,9 @@ import { ProductService } from './services/product.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './components/register/register.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -43,7 +43,7 @@ const routes: Routes = [
     FeaturesComponent,
     AdminDashboardComponent,
     UserComponent,
-    ContactComponent
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,11 +51,9 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     RouterModule,
-    FontAwesomeModule // Import RouterModule and configure routes
+    FontAwesomeModule, // Import RouterModule and configure routes
   ],
   providers: [ProductService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { 
-
-}
+export class AppModule {}
