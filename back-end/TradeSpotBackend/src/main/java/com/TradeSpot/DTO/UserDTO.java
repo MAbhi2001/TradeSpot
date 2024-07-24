@@ -12,14 +12,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
+@Getter
+@Setter
 public class UserDTO {
 
     private String firstName;
@@ -28,7 +28,7 @@ public class UserDTO {
     @JsonProperty( access=JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String address;
-    private Roles role;
+    private String role;
 
 
 

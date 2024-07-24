@@ -7,12 +7,8 @@ import com.TradeSpot.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-
+import lombok.*;
 
 
 @Entity
@@ -21,6 +17,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class User extends BaseEntity{
 
 
@@ -32,12 +29,15 @@ public class User extends BaseEntity{
     private String password;
     @Column(nullable = false)
     private String address;
-    @Column()
+
     @Enumerated(EnumType.STRING)
     private Roles role;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY , orphanRemoval = true, cascade = CascadeType.ALL)
-    List<Product> products=new ArrayList<>();
+    @OneToMany(mappedBy = "buyer",cascade = CascadeType.ALL)
+    List<BroughtItems> broughtItemsList=new ArrayList<>();
+
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
+    List<SellItems> sellItemsList=new ArrayList<>();
 
 
 }

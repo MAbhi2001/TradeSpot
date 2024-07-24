@@ -3,9 +3,10 @@ package com.TradeSpot.services;
 
 
 import com.TradeSpot.DTO.UserDTO;
+import com.TradeSpot.entities.Roles;
 import com.TradeSpot.entities.User;
 
-import com.TradeSpot.repositories.UserRepo;
+import com.TradeSpot.repositories.UserRepository;
 
 
 
@@ -20,10 +21,10 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class UserServices {
+public class UserService {
 
     @Autowired
-    private UserRepo userRepo;
+    private UserRepository userRepository;
 
     @Autowired
     private ModelMapper mapper;
@@ -31,28 +32,30 @@ public class UserServices {
     public User addUser(UserDTO userDTO) {
 
         User user= mapper.map(userDTO, User.class);
-        return userRepo.save(user);
+        System.out.println(user);
+        user.setRole(Roles.valueOf(userDTO.getRole()));
+        return userRepository.save(user);
     }
 
     public List<UserDTO> listOfAllUsers() {
 
-        List<User> users=userRepo.findAll();
+        List<User> users= userRepository.findAll();
         return users.stream().map(user-> mapper.map(user, UserDTO.class)).collect(Collectors.toList());
     }
 
     public UserDTO findUser(Long id) {
 
-        User user=userRepo.findById(id).orElseThrow();
+        User user= userRepository.findById(id).orElseThrow();
         return mapper.map(user, UserDTO.class);
     }
 
     public void deleteUser(Long id) {
 
-        userRepo.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     public List<User> findByName(String name) {
 
-        return userRepo.getByName(name);
+        return userRepository.getByName(name);
     }
 }

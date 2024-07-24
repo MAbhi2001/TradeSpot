@@ -9,7 +9,7 @@ import com.TradeSpot.entities.ApiResponse;
 
 import com.TradeSpot.entities.User;
 
-import com.TradeSpot.services.UserServices;
+import com.TradeSpot.services.UserService;
 
 
 
@@ -20,16 +20,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/user")
 public class UserController {
 
     @Autowired
-    private UserServices userservice;
+    private UserService userservice;
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<ApiResponse> saveUser(@RequestBody UserDTO userDTO){
