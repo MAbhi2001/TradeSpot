@@ -2,7 +2,7 @@ package com.TradeSpot.services.jwt;
 
 import com.TradeSpot.customException.CustomException;
 import com.TradeSpot.entities.User;
-import com.TradeSpot.repositories.UserRepo;
+import com.TradeSpot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,7 +15,7 @@ import java.util.Collections;
 public class UserJwtImpl implements UserDetailsService {
 
     @Autowired
-    private UserRepo userRepo;
+    private UserRepository userRepo;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

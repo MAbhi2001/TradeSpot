@@ -37,15 +37,15 @@ public class UserServices {
 
     public User addUser(UserDTO userDTO) {
 
-        if(userRepo.existsByEmail(userDTO.getEmail())){
+        if(userRepository.existsByEmail(userDTO.getEmail())){
             return null;
         }
         User user= mapper.map(userDTO, User.class);
 
         //hash the password
         user.setPassword(encoder.encode(userDTO.getPassword()));
-        user.setRole(Roles.BUYER);
-        return userRepo.save(user);
+        user.setRole(Roles.USER);
+        return userRepository.save(user);
     }
 
     public List<UserDTO> listOfAllUsers() {
@@ -71,7 +71,7 @@ public class UserServices {
     }
 
     public UserRespDTO findByEmail(String email){
-        User user=userRepo.findByEmail(email).orElseThrow(()->new CustomException("User with email not exits"));
+        User user=userRepository.findByEmail(email).orElseThrow(()->new CustomException("User with email not exits"));
         return  mapper.map(user, UserRespDTO.class) ;
     }
 

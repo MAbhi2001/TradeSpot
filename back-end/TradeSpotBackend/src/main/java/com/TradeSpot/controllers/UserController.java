@@ -35,7 +35,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService userservice;
+    private UserServices userservice;
 
     @Autowired
     private UserJwtImpl userJwt;
