@@ -3,9 +3,18 @@ package com.TradeSpot.services;
 
 
 import com.TradeSpot.DTO.UserDTO;
+
+import com.TradeSpot.DTO.UserRespDTO;
+import com.TradeSpot.customException.CustomException;
 import com.TradeSpot.entities.Roles;
 import com.TradeSpot.entities.User;
+
 import com.TradeSpot.repositories.UserRepository;
+
+
+
+
+
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +39,19 @@ public class UserServices {
 
     public User addUser(UserDTO userDTO) {
 
+
         if(userRepository.existsByEmail(userDTO.getEmail())){
+
             return null;
         }
         User user= mapper.map(userDTO, User.class);
 
         //hash the password
         user.setPassword(encoder.encode(userDTO.getPassword()));
+
         user.setRole(Roles.valueOf(userDTO.getRole()));
         return userRepository.save(user);
+
     }
 
     public List<UserDTO> listOfAllUsers() {
@@ -62,6 +75,13 @@ public class UserServices {
 
         return userRepository.getByName(name);
     }
+
+
+    public UserRespDTO findByEmail(String email){
+        User user=userRepo.findByEmail(email).orElseThrow(()->new CustomException("User with email not exits"));
+        return  mapper.map(user, UserRespDTO.class) ;
+    }
+
 
 
 }

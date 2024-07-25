@@ -1,6 +1,6 @@
 // src/app/services/product.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
 
@@ -16,7 +16,9 @@ export class ProductService {
 
   // Get all products
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+    return this.http.get<Product[]>(this.apiUrl, {
+      headers:this.createAuthorizationHeader()
+    });
   }
 
   // Get product by ID
@@ -42,5 +44,20 @@ export class ProductService {
   // Delete a product
   deleteProduct(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  createAuthorizationHeader() {
+    const jwtToken = sessionStorage.getItem("jwt");
+    if (jwtToken) {
+      return new HttpHeaders().set(
+        "Authorization","Bearer "+ jwtToken
+      )
+      
+    }
+    else {
+      console.log("jwt not found");
+      
+    }
+    return new HttpHeaders();
   }
 }

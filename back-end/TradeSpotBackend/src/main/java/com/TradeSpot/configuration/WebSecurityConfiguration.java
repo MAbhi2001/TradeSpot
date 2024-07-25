@@ -31,7 +31,8 @@ private JwtRequestFilter jwtRequestFilter;
         return security.csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(
                         auth->auth.requestMatchers("/user/signup","/user/login").permitAll()
-                ).authorizeHttpRequests(auth->auth.requestMatchers(HttpMethod.GET,"/user").authenticated())
+                ).authorizeHttpRequests(auth->auth.requestMatchers(HttpMethod.POST,"/user/getByToken").authenticated())
+                .authorizeHttpRequests(auth->auth.requestMatchers(new AntPathRequestMatcher("/product")).authenticated())
                 .authorizeHttpRequests(auth->auth.requestMatchers(new AntPathRequestMatcher("/product/{id}")).authenticated())
                 .sessionManagement(sm->sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
