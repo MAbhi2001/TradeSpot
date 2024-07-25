@@ -78,7 +78,7 @@ public class UserServices {
 
 
     public UserRespDTO findByEmail(String email){
-        User user=userRepo.findByEmail(email).orElseThrow(()->new CustomException("User with email not exits"));
+        User user=userRepository.findByEmail(email).orElseThrow(()->new CustomException("User with email not exits"));
         return  mapper.map(user, UserRespDTO.class) ;
     }
 
